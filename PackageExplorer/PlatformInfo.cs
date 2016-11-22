@@ -8,24 +8,33 @@ namespace PackageExplorer
 {
     public class PlatformInfo
     {
-        private List<string> libCountMap;
-        private List<string> buildCountMap;
-        private List<string> dependencyCount;
+        private string platForm;
+        private List<string> assembliesInLib;
+        private List<string> assembliesInBuild;
+        private List<string> dependencies;
 
-        public List<string> LibCountMap
+        public string PlatForm
         {
-            get { return libCountMap; }
+            get { return platForm; }
+            set { platForm = value; }
         }
 
-        public List<string> BuildCountMap
+        public List<string> AssembliesInLib
         {
-            get { return buildCountMap; }
+            get { return assembliesInLib; }
+            set { assembliesInLib = value; }
         }
 
-        public List<string> DependencyCount
+        public List<string> AssembliesInBuild
         {
-            get { return dependencyCount; }
+            get { return assembliesInBuild; }
+            set { assembliesInBuild = value; }
+        }
+
+        public List<string> Dependencies
+        {
+            get { return dependencies; }
+            set { dependencies = value; }
         }
     }
-
 }

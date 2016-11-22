@@ -6,6 +6,19 @@
         xmlns:local="clr-namespace:PackageExplorer"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="735">
+
+    <Window.Resources>
+        <DataTemplate x:Key="packageName">
+            <TextBlock x:Name="txtPackageName" Text="{Binding Path=PackageName}"></TextBlock>
+        </DataTemplate>
+        <DataTemplate x:Key="platform">
+            <TextBlock x:Name="txtPackageName" Text="{Binding Path=Platforms}"></TextBlock>
+        </DataTemplate>
+        <DataTemplate x:Key="libCount">
+            <TextBlock x:Name="txtPackageName" Text="{Binding Path=PlatformList}"></TextBlock>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" ></RowDefinition>
@@ -47,26 +60,29 @@
 
         <ListView Name="lvwPackageInfo" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Width="730">
             <ListView.ItemTemplate>
-                <DataTemplate x:Name="package">
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="{Binding Path=PackageName}"></TextBlock>
-                        <TextBlock Text="{Binding Path=PlatForms}"></TextBlock>
-                        <TextBlock Text="{Binding Path=LibCountMap}"></TextBlock>
-                        <TextBlock Text="{Binding Path=BuildCountMap}"></TextBlock>
-                        <TextBlock Text="{Binding Path=DependencyCount}"></TextBlock>
-                    </StackPanel>
+                <DataTemplate>
+                    <Border>
+                        <StackPanel>
+                            <Label>Title</Label>
+                            <StackPanel>
+                                <Image>
+                                </Image>
+                                <Label>Lib</Label>
+                            </StackPanel>
+                            <StackPanel>
+                                <Image>
+                                </Image>
+                                <Label>Lib</Label>
+                            </StackPanel>
+                            <StackPanel>
+                                <Image>
+                                </Image>
+                                <Label>Lib</Label>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Package Name"></GridViewColumn>
-                    <GridViewColumn Header="PlatForms"></GridViewColumn>
-                    <GridViewColumn Header="Lib Count"></GridViewColumn>
-                    <GridViewColumn Header="Build Count"></GridViewColumn>
-                    <GridViewColumn Header="Dependency Count"></GridViewColumn>
-                </GridView>
-            </ListView.View>
         </ListView>
     </Grid>
 </Window>

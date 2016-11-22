@@ -24,7 +24,7 @@ namespace PackageExplorer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<PackageInfoViewModel> packages;
+        public List<PackageInfo> packageInfos;
         private string extractTargetFolder = @"C:\UnZipNuGetPackages";
         private const string NameSpaceOfNuspecFile = "http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd";
 
@@ -45,23 +45,21 @@ namespace PackageExplorer
 
             //ExtractAllNupkgFiles();
             //CollectAllPackagesInfo();
-            packages = new List<PackageInfoViewModel>() {
-                new PackageInfoViewModel()
+            packageInfos = new List<PackageInfo>()
+            {
+                new PackageInfo()
                 {
-                    PackageName ="package name",
-                    PlatForms = new List<Platform>()
+                    PackageName =  "package1",
+                    PlatformList = new List<PlatformInfo>()
                     {
-                        Platform.WLM
-                    },
-                    LibCountMap  = new Dictionary<string, int>()
-                    {
-                        { "WLM",1 }
-                    },
-                    BuildCountMap  = new Dictionary<string, int>()
-                    {
-                        { "WLM",2 }
-                    },
-                    DependencyCount = 3
+                        new PlatformInfo()
+                        {
+                            PlatForm ="WLM",
+                            AssembliesInLib = new List<string>() { "1.dll", "2.dll" },
+                            AssembliesInBuild = new List<string>() {"1.dll","2.dll"},
+                            Dependencies = new List<string>() {"x1.dll"}
+                        }
+                    }
                 }
             };
             Display();
@@ -83,7 +81,7 @@ namespace PackageExplorer
         {
             string packageName;
 
-            packages = new List<PackageInfoViewModel>();
+            packageInfos = new List<PackageInfo>();
             string[] nuspecFiles = Directory.GetFiles(extractTargetFolder, "*.nuspec", SearchOption.AllDirectories);
             foreach (var nuspecFile in nuspecFiles)
             {
@@ -95,7 +93,7 @@ namespace PackageExplorer
                 XmlNode id = xmldoc.SelectSingleNode("a:package/a:metadata/a:id", xmlns);//ByTag;
 
                 packageName = id.InnerText;
-                packages.Add(new PackageInfoViewModel() { PackageName = packageName });
+                packageInfos.Add(new PackageInfo() { PackageName = packageName });
 
                 CollectPackageInfoByStatistics(nuspecFile, packageName);
             }
@@ -115,22 +113,22 @@ namespace PackageExplorer
                 string subFolderName;
                 foreach (var subFolder in subFolders)
                 {
-                    subFolderName = new DirectoryInfo(subFolder).Name;
+                    //subFolderName = new DirectoryInfo(subFolder).Name;
 
-                    if (subFolderName.Contains("MonoAndroid"))
-                    {
-                        packages.Last().PlatForms.Add((Platform)Enum.Parse(typeof(Platform), "Android"));
-                    }
+                    //if (subFolderName.Contains("MonoAndroid"))
+                    //{
+                    //    packageInfos.Last().PlatForms.Add((PlatformInfo)Enum.Parse(typeof(PlatformInfo), "Android"));
+                    //}
 
-                    if (subFolderName.Contains("ios"))
-                    {
-                        packages.Last().PlatForms.Add((Platform)Enum.Parse(typeof(Platform), "Ios"));
-                    }
+                    //if (subFolderName.Contains("ios"))
+                    //{
+                    //    packageInfos.Last().PlatForms.Add((PlatformInfo)Enum.Parse(typeof(PlatformInfo), "Ios"));
+                    //}
 
-                    if (subFolderName.Contains("net"))
-                    {
-                        packages.Last().PlatForms.Add((Platform)Enum.Parse(typeof(Platform), "WLM"));
-                    }
+                    //if (subFolderName.Contains("net"))
+                    //{
+                    //    packageInfos.Last().PlatForms.Add((PlatformInfo)Enum.Parse(typeof(PlatformInfo), "WLM"));
+                    //}
                 }
             });
 
@@ -156,7 +154,7 @@ namespace PackageExplorer
 
         private void Display()
         {
-            lvwPackageInfo.ItemsSource = packages;
+            lvwPackageInfo.ItemsSource = packageInfos;
         }
     }
 }

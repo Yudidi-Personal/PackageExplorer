@@ -73,8 +73,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PackageInfoViewModel.cs" />
-    <Compile Include="PlatformType.cs" />
+    <Compile Include="PackageInfo.cs" />
+    <Compile Include="PlatformInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
