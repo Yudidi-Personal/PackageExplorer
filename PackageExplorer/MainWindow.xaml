@@ -5,8 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PackageExplorer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="735">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" ></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal" MinWidth="735">
+            <TextBlock Text="Package Directory" Margin="0 0 2 0" ></TextBlock>
+            <TextBox Name="txtPackageFolder" Width="567"></TextBox>
+            <Button Name="btnLoadPackages" Width="50" Content="Load" Margin="2 0" Click="btnLoadPackagesClick"></Button>
+        </StackPanel>
+
+        <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="2 2" MinWidth="735">
+            <TextBlock Text="Search" Margin="0 0 5 0"></TextBlock>
+            <TextBox  MinWidth="200" Margin="0 0 10 0"></TextBox>
+            <CheckBox></CheckBox>
+            <TextBlock Text="Show All" Margin="2 0 5 0"></TextBlock>
+            <!--<TextBlock Text="|" Margin="2 -1"></TextBlock>-->
+            <CheckBox></CheckBox>
+            <TextBlock Text="Drawing" Margin="2 0 5 0"></TextBlock>
+            <CheckBox></CheckBox>
+            <TextBlock Text="Layers" Margin="2 0 5 0"></TextBlock>
+            <CheckBox></CheckBox>
+            <TextBlock Text="Styles" Margin="2 0 5 0"></TextBlock>
+            <CheckBox></CheckBox>
+            <TextBlock Text="Products" Margin="2 0 5 0"></TextBlock>
+            <CheckBox></CheckBox>
+            <TextBlock Text="Dependency" Margin="2 0 5 0"></TextBlock>
+            <CheckBox></CheckBox>
+            <TextBlock Text="Others" Margin="2 0 5 0"></TextBlock>
+        </WrapPanel>
+
+        <ListView Name="lvwPackageInfo" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Width="730">
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="package">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="{Binding Path=PackageName}"></TextBlock>
+                        <TextBlock Text="{Binding Path=PlatForms}"></TextBlock>
+                        <TextBlock Text="{Binding Path=LibCountMap}"></TextBlock>
+                        <TextBlock Text="{Binding Path=BuildCountMap}"></TextBlock>
+                        <TextBlock Text="{Binding Path=DependencyCount}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Package Name"></GridViewColumn>
+                    <GridViewColumn Header="PlatForms"></GridViewColumn>
+                    <GridViewColumn Header="Lib Count"></GridViewColumn>
+                    <GridViewColumn Header="Build Count"></GridViewColumn>
+                    <GridViewColumn Header="Dependency Count"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
